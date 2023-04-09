@@ -58,6 +58,11 @@ However, the best algorithm ultimately turned out to be the MaxAbsScaler, LightG
 ## Pipeline comparison
 **Compare the two models and their performance. What are the differences in accuracy? In architecture? If there was a difference, why do you think there was one?**
 
+When compared to the HyperDrive Model, the model created by AutoML had a marginally superior accuracy, as can be seen in the final Jupyter Notebook. MaxAbsScaler, LightGBM, one of AutoML's finest models, had an accuracy of 0.9153, and the HyperDrive Model had an accuracy of 0.9060. The HyperDrive architecture was limited to Sci-KitLearn's Logistic Regression. Around 20 different models might be evaluated by the AutoML, which has access to a large range of models. In comparison to AutoML, HyperDrive is undoubtedly at a disadvantage given that AutoML offers more than 20 models from which to choose during an experiment.
+
+In order to find the appropriate model architecture, hyperparameters, and features depending on a given dataset and evaluation metric, AutoML employs algorithms. Hyperdrive is a tool for adjusting hyperparameters that employs an optimization method to identify the ideal collection of hyperparameters for a predetermined model architecture.
+Both AutoML and hyperdrive are used to optimize machine learning models; however, AutoML is more versatile and can also look for the best model architecture, whilst hyperdrive exclusively focuses on hyperparameter tweaking.
+
 ## Future work
 Future work might involve enhancing HyperDrive. Instead, you could use Bayesian Parameter Sampling, which samples a probability distribution using Markov Chain Monte Carlo techniques.
 
