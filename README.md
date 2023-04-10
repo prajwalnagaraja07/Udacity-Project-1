@@ -21,25 +21,27 @@ When the primary metric is outside of the specified slack/factor range of the mo
 **Explain the pipeline architecture, including data, hyperparameter tuning, and classification algorithm.**
 
 For hyperameter tuning, we combine the Sci-KitLearn Logistic Regression algorithm with HyperDrive. The following steps make up the pipeline:
-1.Data Gathering
-2.Data Cleaning
-3.Data Splitting 
-4.Hyperparameter Sampling
-5.Modeling Activating 
-6.Model Testing 
-7.Early Stopping Stopping
-8.Saving the Model
+- 1.Data Gathering
+- 2.Data Cleaning
+- 3.Data Splitting 
+- 4.Hyperparameter Sampling
+- 5.Modeling Activating 
+- 6.Model Testing 
+- 7.Early Stopping Stopping
+- 8.Saving the Model
 
-´´´ python
+Hyperparameter tuning based on the parameters "C" and "--max_iter" specified gets evaluated based on given policy and metric defined in the Hyperdrive config.
+
+``` python
 ps = RandomParameterSampling({
     "--C" : choice(0.01, 0.1, 1),
     "--max_iter" : choice(20, 40, 60, 100, 150, 200)
 })
 
 policy = BanditPolicy(slack_factor=0.15, evaluation_interval=1, delay_evaluation=5)
-´´´
+```
 
-´´´
+``` python
 hyperdrive_config = HyperDriveConfig(run_config=src,
                     hyperparameter_sampling=ps,
                     policy=policy,
@@ -47,7 +49,9 @@ hyperdrive_config = HyperDriveConfig(run_config=src,
                     primary_metric_goal= PrimaryMetricGoal.MAXIMIZE,
                     max_total_runs=4,
                     max_concurrent_runs=4)
-´´´
+```
+
+The best model with highest metric gets saved.
 
 # Specify a Policy
 policy = BanditPolicy(slack_factor=0.15, evaluation_interval=1, delay_evaluation=5)
