@@ -30,6 +30,28 @@ For hyperameter tuning, we combine the Sci-KitLearn Logistic Regression algorith
 7.Early Stopping Stopping
 8.Saving the Model
 
+´´´ python
+ps = RandomParameterSampling({
+    "--C" : choice(0.01, 0.1, 1),
+    "--max_iter" : choice(20, 40, 60, 100, 150, 200)
+})
+
+policy = BanditPolicy(slack_factor=0.15, evaluation_interval=1, delay_evaluation=5)
+´´´
+
+´´´
+hyperdrive_config = HyperDriveConfig(run_config=src,
+                    hyperparameter_sampling=ps,
+                    policy=policy,
+                    primary_metric_name='Accuracy',
+                    primary_metric_goal= PrimaryMetricGoal.MAXIMIZE,
+                    max_total_runs=4,
+                    max_concurrent_runs=4)
+´´´
+
+# Specify a Policy
+policy = BanditPolicy(slack_factor=0.15, evaluation_interval=1, delay_evaluation=5)
+
 **What are the benefits of the parameter sampler you chose?**
 RandomParameterSampling, which draws hyperparameters at random from a predetermined search space, is the parameter sampler of choice in the code.
 The ease of use and lack of prerequisite information or presumptions regarding the search space are two advantages of using RandomParameterSampling. By randomly selecting from a wide range of values for each hyperparameter, it also enables a more thorough exploration of the search space.
