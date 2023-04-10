@@ -18,9 +18,9 @@ Additionally, it supports our Bandit Policy of early stopping by supporting the 
 When the primary metric is outside of the specified slack/factor range of the most successful run, the Bandit Policy terminates the run. The Bandit Policy has the advantage of appearing to be the most configurable when compared to other stopping policies. Additionally, there is no termination policy, which is quite obvious in the ways that it continues. By terminating subpar runs, early termination policies increase computational efficiency. This may be very helpful. Between positive and negative classes, there is a huge imbalance. This might encourage bias in the model.
 
 ## Scikit-learn Pipeline
-**Explain the pipeline architecture, including data, hyperparameter tuning, and classification algorithm.**
 
 The following steps make up the pipeline:
+
 **Data Gathering.**
 
 A Dataset is collected from the link provided using TabularDatasetFactory. In this procedure, the rows with empty values are removed, and the dataset for the category columns is one-hot encoded. It is usual procedure to divide datasets into train and test sets. To validate or fine-tune the model, a dataset might be partitioned. I divided the data during this experience 80:20, or 80% for training and 20% for testing.
@@ -124,11 +124,12 @@ The following code snippet shows the hyperparameter setting configured for model
 }
 ```
 ## Pipeline comparison
-**Compare the two models and their performance. What are the differences in accuracy? In architecture? If there was a difference, why do you think there was one?**
 
 In order to find the appropriate model architecture, hyperparameters, and features depending on a given dataset and evaluation metric, AutoML employs algorithms. Hyperdrive is a tool for adjusting hyperparameters that employs an optimization method to identify the ideal collection of hyperparameters for a predetermined model architecture.
 
-When compared to the HyperDrive Model, the model created by AutoML had a marginally superior accuracy, as can be seen in the following Table. MaxAbsScaler, LightGBM, one of AutoML's finest models, had an accuracy of 0.9153, and the HyperDrive Model had an accuracy of 0.9060. The HyperDrive architecture was limited to Sci-KitLearn's Logistic Regression. Around 20 different models stand evaluated by the AutoML, which has access to a large range of models. In comparison to AutoML, HyperDrive is undoubtedly at a disadvantage given that AutoML offers more models to choose during an experiment.
+When compared to the HyperDrive Model, the model created by AutoML had a marginally superior accuracy, as can be seen in the following Table.
+
+MaxAbsScaler, LightGBM, one of AutoML's finest models, had an accuracy of 0.9153, and the HyperDrive Model had an accuracy of 0.9060. The HyperDrive architecture was limited to Sci-KitLearn's Logistic Regression. Many models stand evaluated by the AutoML, which has access to a large range of models. In comparison to AutoML, HyperDrive is undoubtedly at a disadvantage given that AutoML offers more models to choose during an experiment.
 
 | Algorithm | Method | Accuracy |
 | -------- | -------- | -------- |
