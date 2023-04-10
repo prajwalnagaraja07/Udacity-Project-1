@@ -21,14 +21,14 @@ When the primary metric is outside of the specified slack/factor range of the mo
 **Explain the pipeline architecture, including data, hyperparameter tuning, and classification algorithm.**
 
 For hyperameter tuning, we combine the Sci-KitLearn Logistic Regression algorithm with HyperDrive. The following steps make up the pipeline:
-- 1.Data Gathering
-- 2.Data Cleaning
-- 3.Data Splitting 
-- 4.Hyperparameter Sampling
-- 5.Modeling Activating 
-- 6.Model Testing 
-- 7.Early Stopping Stopping
-- 8.Saving the Model
+- Data Gathering
+- Data Cleaning
+- Data Splitting 
+- Hyperparameter Sampling
+- Modeling Activating 
+- Model Testing 
+- Early Stopping Stopping
+- Saving the Model
 
 Hyperparameter tuning based on the parameters "C" and "--max_iter" specified gets evaluated based on given policy and metric defined in the Hyperdrive config.
 
