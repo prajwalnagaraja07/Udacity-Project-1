@@ -21,16 +21,12 @@ When the primary metric is outside of the specified slack/factor range of the mo
 **Explain the pipeline architecture, including data, hyperparameter tuning, and classification algorithm.**
 
 For hyperameter tuning, we combine the Sci-KitLearn Logistic Regression algorithm with HyperDrive. The following steps make up the pipeline:
-- Data Gathering
-- Data Cleaning
-- Data Splitting 
-- Hyperparameter Sampling
-- Modeling Activating 
-- Model Testing 
-- Early Stopping Stopping
-- Saving the Model
+1. Data Gathering
+    - A Dataset is collected from the link provided using TabularDatasetFactory. In this procedure, the rows with empty values are removed, and the dataset for the category columns is one-hot encoded. It is usual procedure to divide datasets into train and test sets. To validate or fine-tune the model, a dataset might be partitioned. I divided the data during this experience 80:20, or 80% for training and 20% for testing.
+ 
+2. Hyperparameter Sampling
 
-Hyperparameter tuning based on the parameters "C" and "--max_iter" specified gets evaluated based on given policy and metric defined in the Hyperdrive config.
+The model training process can be managed via hyperparameters, which are adjustable parameters. Hyperparameter tuning based on the parameters "C" and "--max_iter" specified gets evaluated based on given policy and metric defined in the Hyperdrive config.
 
 ``` python
 ps = RandomParameterSampling({
@@ -51,7 +47,20 @@ hyperdrive_config = HyperDriveConfig(run_config=src,
                     max_concurrent_runs=4)
 ```
 
-The best model with highest metric gets saved.
+To sample over discrete sets of values, we employed random parameter sampling. Although it takes more time to perform, random parameter sampling is excellent for discovery learning and hyperparameter combinations. The best model with highest metric gets saved.
+
+3. Model Training 
+After dividing our dataset into training and test sets, we can train our model using the chosen hyperparameters. Model fitting refers to this. 
+
+4. Model Testing 
+To test the trained model, the test dataset is divided, and metrics are generated and tracked. The model is then benchmarked using these measures. In this instance, using accuracy as a gauge of model performance.
+
+5. Early Stopping Stopping
+The HyperDrive early halting strategy is used to evaluate the model testing metric. If the criteria outlined by the policy are satisfied, the pipeline's execution is terminated.
+In our model, we employed the BanditPolicy. Based on the best-performing run's slack factor and slack quantity, this policy was developed. This enhances the effectiveness of computing.
+
+6. Saving the Model
+After then, the trained model is preserved, which is crucial if you wish to deploy it or use it in additional trials.
 
 # Specify a Policy
 policy = BanditPolicy(slack_factor=0.15, evaluation_interval=1, delay_evaluation=5)
