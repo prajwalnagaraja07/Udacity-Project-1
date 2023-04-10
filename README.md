@@ -52,7 +52,11 @@ To sample over discrete sets of values, we employed random parameter sampling. A
 
 **Model Training.**
 
-After dividing our dataset into training and test sets, we can train our model using the chosen hyperparameters. Model fitting refers to this. 
+After dividing our dataset into training and test sets, we can train our model using the chosen hyperparameters. Model fitting refers to this. Here we use Logistic Regression from sklearn.
+
+```python
+model = LogisticRegression(C=args.C, max_iter=args.max_iter).fit(x_train, y_train)
+```
 
 **Model Testing.** 
 
@@ -139,5 +143,19 @@ Future work might involve enhancing HyperDrive. Instead, you could use Bayesian 
 AutoML could be improved by increasing the experiment timeout, which would enable more model experimentation. The class imbalance within the datset is another issue that we could address. This would lessen the bias in the models.
 
 ## Proof of cluster clean up
-**If you did not delete your compute cluster in the code, please complete this section. Otherwise, delete this section.**
-**Image of cluster marked for deletion**
+For the entire course, I used my own subscription. Howerver, here is thr code snippet to delete the clusters/instances.
+
+```python
+from azureml.core import Workspace, ComputeTarget
+
+# Load your workspace
+workspace = Workspace.from_config()
+
+# Get all the compute targets in your workspace
+compute_targets = workspace.compute_targets
+
+# Loop through each compute target and delete it if it's a cluster
+for name, ct in compute_targets.items():
+    if ct.type == ComputeTarget.Type.AML_CLUSTER:
+        ct.delete()
+```
