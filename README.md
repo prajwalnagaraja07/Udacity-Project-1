@@ -21,11 +21,11 @@ When the primary metric is outside of the specified slack/factor range of the mo
 **Explain the pipeline architecture, including data, hyperparameter tuning, and classification algorithm.**
 
 The following steps make up the pipeline:
-**Data Gathering
+**Data Gathering.**
 
 A Dataset is collected from the link provided using TabularDatasetFactory. In this procedure, the rows with empty values are removed, and the dataset for the category columns is one-hot encoded. It is usual procedure to divide datasets into train and test sets. To validate or fine-tune the model, a dataset might be partitioned. I divided the data during this experience 80:20, or 80% for training and 20% for testing.
  
-**Hyperparameter Sampling
+**Hyperparameter Sampling.**
 
 The model training process can be managed via hyperparameters, which are adjustable parameters. Hyperparameter tuning based on the parameters "C" and "--max_iter" specified gets evaluated based on given policy and metric defined in the Hyperdrive config.
 
@@ -50,24 +50,25 @@ hyperdrive_config = HyperDriveConfig(run_config=src,
 
 To sample over discrete sets of values, we employed random parameter sampling. Although it takes more time to perform, random parameter sampling is excellent for discovery learning and hyperparameter combinations. The best model with highest metric gets saved.
 
-**Model Training 
+**Model Training.**
 
 After dividing our dataset into training and test sets, we can train our model using the chosen hyperparameters. Model fitting refers to this. 
 
-**Model Testing 
+**Model Testing.** 
 
 To test the trained model, the test dataset is divided, and metrics are generated and tracked. The model is then benchmarked using these measures. In this instance, using accuracy as a gauge of model performance.
 
-**Early Stopping Stopping
+**Early Stopping Stopping.**
 
 The HyperDrive early halting strategy is used to evaluate the model testing metric. If the criteria outlined by the policy are satisfied, the pipeline's execution is terminated.
 In our model, we employed the BanditPolicy. Based on the best-performing run's slack factor and slack quantity, this policy was developed. This enhances the effectiveness of computing.
 
-**Saving the Model
+**Saving the Model.**
 
 After then, the trained model is preserved, which is crucial if you wish to deploy it or use it in additional trials.
 
 **RandomParameterSampling**
+
 RandomParameterSampling, which draws hyperparameters at random from a predetermined search space, is the parameter sampler of choice in the code.
 The ease of use and lack of prerequisite information or presumptions regarding the search space are two advantages of using RandomParameterSampling. By randomly selecting from a wide range of values for each hyperparameter, it also enables a more thorough exploration of the search space.
 As it does not necessitate a thorough search of all possible combinations, RandomParameterSampling can be computationally efficient for high-dimensional search spaces. Instead, it chooses hyperparameter values at random, which enables the search to concentrate on interesting regions of the search space.
@@ -121,9 +122,15 @@ The following code snippet shows the hyperparameter setting configured for model
 ## Pipeline comparison
 **Compare the two models and their performance. What are the differences in accuracy? In architecture? If there was a difference, why do you think there was one?**
 
-When compared to the HyperDrive Model, the model created by AutoML had a marginally superior accuracy, as can be seen in the final Jupyter Notebook. MaxAbsScaler, LightGBM, one of AutoML's finest models, had an accuracy of 0.9153, and the HyperDrive Model had an accuracy of 0.9060. The HyperDrive architecture was limited to Sci-KitLearn's Logistic Regression. Around 20 different models might be evaluated by the AutoML, which has access to a large range of models. In comparison to AutoML, HyperDrive is undoubtedly at a disadvantage given that AutoML offers more than 20 models from which to choose during an experiment.
-
 In order to find the appropriate model architecture, hyperparameters, and features depending on a given dataset and evaluation metric, AutoML employs algorithms. Hyperdrive is a tool for adjusting hyperparameters that employs an optimization method to identify the ideal collection of hyperparameters for a predetermined model architecture.
+
+When compared to the HyperDrive Model, the model created by AutoML had a marginally superior accuracy, as can be seen in the following Table. MaxAbsScaler, LightGBM, one of AutoML's finest models, had an accuracy of 0.9153, and the HyperDrive Model had an accuracy of 0.9060. The HyperDrive architecture was limited to Sci-KitLearn's Logistic Regression. Around 20 different models stand evaluated by the AutoML, which has access to a large range of models. In comparison to AutoML, HyperDrive is undoubtedly at a disadvantage given that AutoML offers more models to choose during an experiment.
+
+| Algorithm | Method | Accuracy |
+| -------- | -------- | -------- |
+| MaxAbsScaler, LightGBM | AutoML | 0.9153 |
+| Logistic Regression | HyperDrive | 0.9060 |
+
 Both AutoML and hyperdrive are used to optimize machine learning models; however, AutoML is more versatile and can also look for the best model architecture, whilst hyperdrive exclusively focuses on hyperparameter tweaking.
 
 ## Future work
