@@ -63,8 +63,9 @@ However, the best algorithm ultimately turned out to be the MaxAbsScaler, LightG
     "param_kwargs": {},
     "prepared_kwargs": {}
 }
-
+```
 The following code snippet shows the hyperparameter setting configured for model.
+
 ```json
 {
     "spec_class": "sklearn",
@@ -76,7 +77,7 @@ The following code snippet shows the hyperparameter setting configured for model
     },
     "prepared_kwargs": {}
 }
-
+```
 ## Pipeline comparison
 **Compare the two models and their performance. What are the differences in accuracy? In architecture? If there was a difference, why do you think there was one?**
 
