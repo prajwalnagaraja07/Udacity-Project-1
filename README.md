@@ -53,7 +53,29 @@ By automatically examining various algorithms and hyperparameters, AutoML Azure 
 
 <img width="1039" alt="image" src="https://user-images.githubusercontent.com/110788191/230802102-84f2e7b5-dd0e-4c10-9da3-eca225e3ebbc.png">
 
-However, the best algorithm ultimately turned out to be the MaxAbsScaler, LightGBM, with an accuracy of 0.91. Also, other models trained and evaluated are listed.
+However, the best algorithm ultimately turned out to be the MaxAbsScaler, LightGBM, with an accuracy of 0.91. Also, other models trained and evaluated are listed. Here the following code snippets from AutoML model explainbility. 
+```json
+{
+    "spec_class": "preproc",
+    "class_name": "MaxAbsScaler",
+    "module": "sklearn.preprocessing",
+    "param_args": [],
+    "param_kwargs": {},
+    "prepared_kwargs": {}
+}
+
+The following code snippet shows the hyperparameter setting configured for model.
+```json
+{
+    "spec_class": "sklearn",
+    "class_name": "LightGBMClassifier",
+    "module": "automl.client.core.common.model_wrappers",
+    "param_args": [],
+    "param_kwargs": {
+        "min_data_in_leaf": 20
+    },
+    "prepared_kwargs": {}
+}
 
 ## Pipeline comparison
 **Compare the two models and their performance. What are the differences in accuracy? In architecture? If there was a difference, why do you think there was one?**
