@@ -1,0 +1,12 @@
+2023-03-19 10:49:03.476 - INFO - 26528 - azureml.train.automl._local_managed_utils.is_docker_installed:354 - Docker is installed with Docker version 20.10.22+azure-1, build 3a2c30b63ab20acfcc3f3550ea756a0561655a77
+.
+2023-03-19 10:49:03.478 - INFO - 26528 - azureml.train.automl.automlconfig._start_execution:229 - Submitting remote.
+2023-04-09 23:24:15.630 - INFO - 8152 - azureml.train.automl._local_managed_utils.is_docker_installed:354 - Docker is installed with Docker version 20.10.22+azure-1, build 3a2c30b63ab20acfcc3f3550ea756a0561655a77
+.
+2023-04-09 23:24:15.646 - INFO - 8152 - azureml.train.automl.automlconfig._start_execution:229 - Submitting remote.
+2023-04-10 00:05:48.945 - INFO - 8152 - azureml.train.automl.run._log_activity:55 - ActivityStarted: GetOutput
+2023-04-10 00:05:48.974 - INFO - 8152 - azureml.train.automl.run._log_activity:55 - ActivityStarted: GetOutput
+2023-04-10 00:05:48.998 - INFO - 8152 - azureml.train.automl.run._log_activity:55 - ActivityStarted: GetChildren
+2023-04-10 00:06:49.144 - INFO - 8152 - azureml.train.automl.run._log_activity:89 - ActivityCompleted: Activity=GetChildren, HowEnded=Success, Duration=60145.81[ms]
+2023-04-10 00:06:49.226 - INFO - 8152 - azureml.train.automl.run._log_activity:89 - ActivityCompleted: Activity=GetOutput, HowEnded=Success, Duration=60252.41[ms]
+2023-04-10 00:06:49.642 - INFO - 8152 - azureml.train.automl.run._log_activity:89 - ActivityCompleted: Activity=GetOutput, HowEnded=Success, Duration=60697.04[ms]
